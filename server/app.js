@@ -1,26 +1,46 @@
 // server/app.js
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import pool from "./db.js"
+import * as authRoute from "./routes/auth.js";
 
+
+dotenv.config();
 const app = express();
-const PORT = 3000;
 
-// Middleware
+
+const PORT = process.env.PORT || 5000;
+
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 
-// API v1
-app.get("/api/v1/hello", (req, res) => {
-  res.json({ message: "Hello from API v1 " });
+// route test 
+app.get("/test-db", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT NOW() as now");
+    console.log("Kết nối thành công:", rows[0].now);
+    res.json({ message: "DB OK", time: rows[0].now });
+  } catch (err) {
+    console.error("Lỗi kết nối DB:", err.message);
+    res.status(500).json({ error: "DB connection failed" });
+  }
 });
 
-app.post("/api/v1/echo", (req, res) => {
-  res.json({
-    received: req.body,
-  });
-});
+// routes
+app.use("/v1/auth",authRoute);
+
+
+
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:3000`);
+  console.log(`Server running on port ${PORT}`);
 });
+
+
+//authentication
+
+//authorization
