@@ -1,0 +1,5 @@
+//server test:
+GET http://localhost:3000/test-db
+
+//csdl test:
+get http://localhost:3000/test-db
