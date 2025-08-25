@@ -54,8 +54,16 @@ const authController = {
     } catch (error) {
       res.status(500).json(err);
     }
-  }
-  
+  },
+  //logout
+    LogoutUser: async (req, res) =>  {
+    try{
+      //xoa token hoac thuc hien cac thao tac logout
+      req.logoutUser();
+      res.status(200).json({msg:"logout successful"})
+    }catch(error){
+    }
+  },
 }
 
 

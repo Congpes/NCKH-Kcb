@@ -9,5 +9,6 @@ router.post("/register", authController.registerUser);
 //login
 router.post("/login", authController.loginUser);
 
+router.post("/logout", authController.LogoutUser);
 
 export default router;
