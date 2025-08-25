@@ -18,7 +18,10 @@ export async function createUser({ username, passwordHash, roleId, entityId, ent
   );
   return result.insertId;
 }
-
+//Tao logout 
+export async function logoutUser() {
+  return { message: "Logged out successfully" };
+}
 // Lấy user theo id
 export async function getUserById(id) {
   const [rows] = await pool.query("SELECT * FROM users WHERE id = ?", [id]);

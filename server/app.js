@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import pool from "./db.js"
 import * as authRoute from "./routes/auth.js";
+import * as searchRoutes from "./routes/search.js";
 
 
 dotenv.config();
@@ -32,7 +33,8 @@ app.get("/test-db", async (req, res) => {
 // routes
 app.use("/v1/auth",authRoute);
 
-
+//searchRoutes
+app.use("/search", searchRoutes);
 
 
 // Start server
